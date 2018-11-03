@@ -1,8 +1,8 @@
 <UI version="4.0" >
- <class>NewCalcClass</class>
- <widget class="QWidget" name="NewCalcClass" >
+ <class>calculatorClass</class>
+ <widget class="QWidget" name="calculatorClass" >
   <property name="objectName" >
-   <string notr="true">NewCalcClass</string>
+   <string notr="true">calculatorClass</string>
   </property>
   <property name="geometry" >
    <rect>
@@ -13,13 +13,13 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>NewCalc</string>
+   <string>calculator</string>
   </property>
  </widget>
  <layoutDefault spacing="6" margin="11" />
  <pixmapfunction></pixmapfunction>
  <resources>
-   <include location="NewCalc.qrc"/>
+   <include location="calculator.qrc"/>
  </resources>
  <connections/>
 </UI>

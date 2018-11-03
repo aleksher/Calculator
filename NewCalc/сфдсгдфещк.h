@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
-#include "ui_NewCalc.h"
+#include <QPushButton>
 
 class NewCalc : public QWidget
 {
@@ -11,5 +11,6 @@ public:
 	NewCalc(QWidget *parent = Q_NULLPTR);
 
 private:
-	Ui::NewCalcClass ui;
+	QPushButton *createButton(const QString text, const char *member);
+
 };
