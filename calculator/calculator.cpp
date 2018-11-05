@@ -76,7 +76,7 @@ Calculator::Calculator(QWidget *parent)
 
 void Calculator::digitClicked()
 {
-	// Получим нажатую кнопку
+	// Получим нажатую кнопку каль
 	Button *clickedButton = qobject_cast<Button *>(sender());
 	// Получим нажатую цифру
 	int digitValue = clickedButton->text().toInt();
