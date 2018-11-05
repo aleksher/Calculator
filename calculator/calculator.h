@@ -31,7 +31,7 @@ private:
 
 	// был ли нажат оператор
 	bool isOperatorClicked;
-
+	bool waitingForRightOperand;
 	// создание кнопки
 	Button* createButton(const QString &text, const char *member);
 

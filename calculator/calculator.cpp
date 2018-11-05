@@ -9,6 +9,7 @@ Calculator::Calculator(QWidget *parent)
 	savedValue = 0;
 	result = 0;
 	isOperatorClicked = false;
+	waitingForRightOperand = false;
 
 	// Создание окна вывода
 	output = new QLineEdit("0");
@@ -87,11 +88,15 @@ void Calculator::digitClicked()
 		else
 			output->setText(output->text() + QString::number(digitValue));
 	}
-	// Иначе - 
 	else
 	{
-		if (output->text().length() > 1)
+		// если нажат оператор - заместить старый операнд
+		if (!waitingForRightOperand)
+		{
 			output->setText(QString::number(digitValue));
+			waitingForRightOperand = true;
+		}
+		// продолжать ввод нового операнда
 		else
 			output->setText(output->text() + QString::number(digitValue));
 	}
