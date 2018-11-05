@@ -2,7 +2,6 @@
 #define CALCULATOR_H
 
 #include <QWidget>
-#include <QToolButton>
 class QLineEdit;
 
 class Button;
@@ -16,27 +15,22 @@ public:
 
 private:
 	double savedValue;
-	double sumSoFar;
-	double factorSoFar;
-	QString pendingAdditiveOperator;
-	QString pendingMultiplicativeOperator;
+	double result;
+	double leftOperand;
+	double rightOperand;
+	QString lastOperator;
 	bool waitingForOperand;
 
 	Button* createButton(const QString &text, const char *member);
-	void abortOperation();
-	bool calculate(double rightOperand, const QString &pendingOperator);
+	void calculate();
 
+	QLineEdit *output;
 
-
-	QLineEdit *display;
-
-	enum { NumDigitButtons = 10 };
-	Button *digitButtons[NumDigitButtons];
+	Button *digitButtons[10];
 
 private slots:
 	void digitClicked();
-	void additiveOperatorClicked();
-	void multiplicativeOperatorClicked();
+	void operatorClicked();
 	void equalClicked();
 	void pointClicked();
 	void clear();
