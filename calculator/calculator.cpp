@@ -8,7 +8,7 @@ Calculator::Calculator(QWidget *parent)
 	// Инициализация переменныъ
 	savedValue = 0;
 	result = 0;
-	waitingForOperand = false;
+	isOperatorClicked = false;
 
 	// Создание окна вывода
 	output = new QLineEdit("0");
@@ -80,7 +80,7 @@ void Calculator::digitClicked()
 	// Получим нажатую цифру
 	int digitValue = clickedButton->text().toInt();
 	// Если не был нажат оператор - продолжить ввод числа
-	if (!waitingForOperand)
+	if (!isOperatorClicked)
 	{
 		if (output->text() == "0")
 			output->setText(QString::number(digitValue));
@@ -90,39 +90,42 @@ void Calculator::digitClicked()
 	// Иначе - 
 	else
 	{
-		output->setText(QString::number(digitValue));
+		if (output->text().length() > 1)
+			output->setText(QString::number(digitValue));
+		else
+			output->setText(output->text() + QString::number(digitValue));
 	}
 }
 
 void Calculator::operatorClicked()
 {
-	if (!waitingForOperand)
+	if (!isOperatorClicked)
 	{
 		Button *clickedButton = qobject_cast<Button *>(sender());
 		lastOperator = clickedButton->text();
 		leftOperand = output->text().toDouble();
 		output->clear();
-		waitingForOperand = true;
+		isOperatorClicked = true;
 	}
 	else
 	{
 		rightOperand = output->text().toDouble();
 		calculate();
 		output->setText(QString::number(result));
-		waitingForOperand = false;
+		isOperatorClicked = false;
 	}
 }
 
 void Calculator::equalClicked()
 {
-	if (!waitingForOperand)
+	if (!isOperatorClicked)
 		output->setText(QString::number(result));
 	else
 	{
 		rightOperand = output->text().toInt();
 		calculate();
 		output->setText(QString::number(result));
-		waitingForOperand = false;
+		isOperatorClicked = false;
 	}
 	leftOperand = rightOperand = 0;
 
@@ -163,7 +166,7 @@ void Calculator::pointClicked()
 void Calculator::clear()
 {
 	output->setText("0");
-	if (!waitingForOperand)
+	if (!isOperatorClicked)
 		leftOperand = 0;
 	else
 		rightOperand = 0;

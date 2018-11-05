@@ -14,21 +14,38 @@ public:
 	Calculator(QWidget *parent = 0);
 
 private:
+	// сохраненное значение
 	double savedValue;
-	double result;
-	double leftOperand;
-	double rightOperand;
-	QString lastOperator;
-	bool waitingForOperand;
 
+	// результат вычислений
+	double result;
+
+	// левый операнд
+	double leftOperand;
+
+	// правый операнд
+	double rightOperand;
+
+	// последний нажатый оператор
+	QString lastOperator;
+
+	// был ли нажат оператор
+	bool isOperatorClicked;
+
+	// создание кнопки
 	Button* createButton(const QString &text, const char *member);
+
+	// вычислить значение
 	void calculate();
 
+	// окно вывода
 	QLineEdit *output;
 
+	// массив кнопок
 	Button *digitButtons[10];
 
 private slots:
+	// Методы, реагирующие на нажатия кнопок
 	void digitClicked();
 	void operatorClicked();
 	void equalClicked();
@@ -37,7 +54,6 @@ private slots:
 	void clearAll();
 	void readMemory();
 	void addToMemory();
-
 };
 
 #endif
